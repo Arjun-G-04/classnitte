@@ -1,6 +1,6 @@
 # ClassNITTe
 
-Attendance management app for mechanical students (Batch 2022-26)
+Attendance management website.
 
 ## Technologies Used
 
@@ -11,6 +11,10 @@ Next.js is an open-source web development framework providing React-based web ap
 #### Tailwind CSS
 
 Tailwind CSS is an open-source CSS framework with styling using general classes. [Docs](https://tailwindcss.com/docs/installation)
+
+#### tRPC
+
+tRPC (TypeScript Remote Procedure Call) is an implementation of RPC, designed for TypeScript monorepos. [Docs](https://trpc.io/docs)
 
 ##### Other development tools:
 
@@ -23,14 +27,23 @@ Tailwind CSS is an open-source CSS framework with styling using general classes.
 ## Setup
 
 1. Fork and clone the repo
-2. Install necessary packages using:
+
+2. Enable corepack and download pnpm
+
+```bash
+corepack enable pnpm
+```
+
+3. Install necessary packages
 
 ```bash
 pnpm install
 ```
 
-3. Run the developmental server using:
+4. Run the developmental server
 
 ```bash
 pnpm dev
 ```
+
+_The website will be up and running at http://localhost:3000_
