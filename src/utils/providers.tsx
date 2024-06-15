@@ -11,7 +11,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
 		trpc.createClient({
 			links: [
 				httpBatchLink({
-					url: "http://localhost:3000/api/trpc",
+					url: `${process.env.NODE_ENV === "production" ? "https://classnitte.vercel.app" : "http://localhost:3000"}/api/trpc`,
 				}),
 			],
 		}),
