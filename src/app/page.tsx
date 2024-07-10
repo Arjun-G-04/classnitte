@@ -1,8 +1,12 @@
 import Sample from "@/components/Home/Sample";
 import { caller } from "@/server/caller";
+import { getServerSession } from "next-auth";
 
 export default async function Home() {
 	const something = await caller.sample();
+	const session = await getServerSession();
+
+	console.log(session);
 
 	return (
 		<div className=" flex flex-col gap-5 h-screen w-full justify-center items-center">

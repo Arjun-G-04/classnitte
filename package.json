@@ -21,9 +21,11 @@
 		"@trpc/server": "11.0.0-rc.401",
 		"drizzle-orm": "^0.31.2",
 		"next": "14.2.3",
+		"next-auth": "4.24.7",
 		"pg": "^8.12.0",
 		"react": "^18",
-		"react-dom": "^18"
+		"react-dom": "^18",
+		"server-only": "^0.0.1"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^19.3.0",
