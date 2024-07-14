@@ -1,10 +1,10 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 import { samples } from "./schema/samples";
-import { DB_CONNECTION_STRING } from "@/utils/config";
+import { users } from "./schema/users";
 
 const pool = new Pool({
-	connectionString: DB_CONNECTION_STRING,
+	connectionString: process.env.DB_CONNECTION_STRING!,
 });
 
-export const db = drizzle(pool, { schema: { samples } });
+export const db = drizzle(pool, { schema: { samples, users } });

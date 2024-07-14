@@ -2,6 +2,11 @@ import NextAuth from "next-auth";
 import { AUTH_CLIENT_ID, AUTH_CLIENT_SECRET } from "./config";
 
 export const handler = NextAuth({
+	pages: {
+		signIn: "/",
+		signOut: "/",
+		error: "/",
+	},
 	providers: [
 		{
 			id: "dauth",

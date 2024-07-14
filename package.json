@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
+		"dev": "next dev --turbo",
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
@@ -15,6 +15,7 @@
 		"db:seed": "tsx --env-file=.env src/drizzle/seed.ts"
 	},
 	"dependencies": {
+		"@hookform/resolvers": "^3.9.0",
 		"@tanstack/react-query": "^5.40.1",
 		"@trpc/client": "11.0.0-rc.401",
 		"@trpc/react-query": "11.0.0-rc.401",
@@ -25,7 +26,10 @@
 		"pg": "^8.12.0",
 		"react": "^18",
 		"react-dom": "^18",
-		"server-only": "^0.0.1"
+		"react-hook-form": "^7.52.1",
+		"react-hot-toast": "^2.4.1",
+		"server-only": "^0.0.1",
+		"zod": "^3.23.8"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^19.3.0",
