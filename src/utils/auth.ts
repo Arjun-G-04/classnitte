@@ -7,6 +7,11 @@ export const handler = NextAuth({
 		signOut: "/",
 		error: "/",
 	},
+	callbacks: {
+		async redirect({ url, baseUrl }) {
+			return baseUrl;
+		},
+	},
 	providers: [
 		{
 			id: "dauth",

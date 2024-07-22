@@ -14,7 +14,8 @@ async function main() {
 		.insert(colleges)
 		.values({ name: "NIT Trichy" })
 		.onConflictDoNothing();
-	console.log("Samples seeded.");
+	console.log("Colleges seeded.");
+	console.log("Seed complete.");
 }
 
 main()

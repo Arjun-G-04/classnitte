@@ -12,7 +12,11 @@
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "drizzle-kit migrate",
 		"db:studio": "drizzle-kit studio --port 3001",
-		"db:seed": "tsx --env-file=.env src/drizzle/seed.ts"
+		"db:seed": "tsx --env-file=.env src/drizzle/seed.ts",
+		"db:reset": "tsx --env-file=.env src/drizzle/reset.ts",
+		"db:test": "tsx --env-file=.env src/drizzle/test.ts",
+		"cy:open": "cypress open",
+		"cy:test": "cypress run --browser edge"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.9.0",
@@ -38,6 +42,7 @@
 		"@types/pg": "^8.11.6",
 		"@types/react": "^18",
 		"@types/react-dom": "^18",
+		"cypress": "^13.13.0",
 		"drizzle-kit": "^0.22.7",
 		"eslint": "^8",
 		"eslint-config-next": "14.2.3",
