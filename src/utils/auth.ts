@@ -21,8 +21,7 @@ export const handler = NextAuth({
 				url: "https://auth.delta.nitt.edu/authorize",
 				params: {
 					client_id: AUTH_CLIENT_ID,
-					redirect_uri:
-						"http://localhost:3000/api/auth/callback/dauth",
+					redirect_uri: `${process.env.NODE_ENV === "production" ? "https://classnitte.vercel.app" : "http://localhost:3000"}/api/auth/callback/dauth`,
 					response_type: "code",
 					grant_type: "authorization_code",
 					state: "happycoding",
@@ -45,8 +44,7 @@ export const handler = NextAuth({
 								client_secret: AUTH_CLIENT_SECRET,
 								grant_type: "authorization_code",
 								code: context.params.code || "code",
-								redirect_uri:
-									"http://localhost:3000/api/auth/callback/dauth",
+								redirect_uri: `${process.env.NODE_ENV === "production" ? "https://classnitte.vercel.app" : "http://localhost:3000"}/api/auth/callback/dauth`,
 							}),
 						},
 					);
