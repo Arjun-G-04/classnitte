@@ -16,6 +16,14 @@ Tailwind CSS is an open-source CSS framework with styling using general classes.
 
 tRPC (TypeScript Remote Procedure Call) is an implementation of RPC, designed for TypeScript monorepos. [Docs](https://trpc.io/docs)
 
+#### Drizzle ORM
+
+Drizzle ORM is a lightweight and performant TypeScript ORM with SQL like methods. [Docs](https://orm.drizzle.team/docs/overview)
+
+#### Cypress
+
+Cypress is a frontend test automation tool for end to end testing. [Docs](https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test)
+
 ##### Other development tools:
 
 -   [ESLint](https://eslint.org/docs/latest/)
@@ -95,4 +103,24 @@ pnpm db:generate
 
 ```bash
 pnpm db:studio
+```
+
+**Testing**
+
+-   Setup env variables for testing using
+
+```bash
+cp cy.env.example.json cypress.env.json
+```
+
+-   To develop e2e tests, use cypress application which provides visualization of app flow
+
+```bash
+pnpm cy:open
+```
+
+-   Run all tests via command line
+
+```bash
+pnpm cy:test
 ```

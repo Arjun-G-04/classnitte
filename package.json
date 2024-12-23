@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
+		"dev": "next dev --turbo",
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
@@ -12,18 +12,28 @@
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "drizzle-kit migrate",
 		"db:studio": "drizzle-kit studio --port 3001",
-		"db:seed": "tsx --env-file=.env src/drizzle/seed.ts"
+		"db:seed": "tsx --env-file=.env src/drizzle/seed.ts",
+		"db:reset": "tsx --env-file=.env src/drizzle/reset.ts",
+		"db:test": "tsx --env-file=.env src/drizzle/test.ts",
+		"cy:open": "cypress open",
+		"cy:test": "cypress run --browser edge"
 	},
 	"dependencies": {
+		"@hookform/resolvers": "^3.9.0",
 		"@tanstack/react-query": "^5.40.1",
 		"@trpc/client": "11.0.0-rc.401",
 		"@trpc/react-query": "11.0.0-rc.401",
 		"@trpc/server": "11.0.0-rc.401",
 		"drizzle-orm": "^0.31.2",
 		"next": "14.2.3",
+		"next-auth": "4.24.7",
 		"pg": "^8.12.0",
 		"react": "^18",
-		"react-dom": "^18"
+		"react-dom": "^18",
+		"react-hook-form": "^7.52.1",
+		"react-hot-toast": "^2.4.1",
+		"server-only": "^0.0.1",
+		"zod": "^3.23.8"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^19.3.0",
@@ -32,6 +42,7 @@
 		"@types/pg": "^8.11.6",
 		"@types/react": "^18",
 		"@types/react-dom": "^18",
+		"cypress": "^13.13.0",
 		"drizzle-kit": "^0.22.7",
 		"eslint": "^8",
 		"eslint-config-next": "14.2.3",

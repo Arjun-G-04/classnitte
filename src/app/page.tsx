@@ -1,20 +1,18 @@
-import Sample from "@/components/Home/Sample";
 import { caller } from "@/server/caller";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import Login from "./Login";
 
 export default async function Home() {
-	const something = await caller.sample();
+	const session = await getServerSession();
+	const userExists = await caller.user.exists();
+
+	if (session && userExists) redirect("/home");
+	if (session) redirect("/register");
 
 	return (
 		<div className=" flex flex-col gap-5 h-screen w-full justify-center items-center">
-			<div className=" border flex flex-col px-10 py-5 justify-center items-center">
-				<span className=" underline">Server Component</span>
-				<span>Hello from the server!</span>
-				<span>
-					Data from db:{" "}
-					{something && something[0] ? something[0].name : "No Data"}
-				</span>
-			</div>
-			<Sample />
+			<Login />
 		</div>
 	);
 }
