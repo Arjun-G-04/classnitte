@@ -1,5 +1,10 @@
 import NextAuth from "next-auth";
 import { AUTH_CLIENT_ID, AUTH_CLIENT_SECRET } from "./config";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { eq } from "drizzle-orm";
+import bcrypt from "bcrypt";
+import { db } from "@drizzle/index";
+import { professors } from "@drizzle/schema/professors";
 
 export const handler = NextAuth({
 	pages: {
@@ -36,8 +41,7 @@ export const handler = NextAuth({
 						{
 							method: "POST",
 							headers: {
-								"Content-Type":
-									"application/x-www-form-urlencoded",
+								"Content-Type": "application/x-www-form-urlencoded",
 							},
 							body: new URLSearchParams({
 								client_id: AUTH_CLIENT_ID,
@@ -63,5 +67,45 @@ export const handler = NextAuth({
 			clientId: AUTH_CLIENT_ID,
 			clientSecret: AUTH_CLIENT_SECRET,
 		},
+		CredentialsProvider({
+			id: "profLogin",
+			name: "Professor Login",
+			credentials: {
+				email: { label: "email", type: "text" },
+				password: { label: "password", type: "password" },
+			},
+			async authorize(credentials, req) {
+				if (!credentials?.email || !credentials?.password)
+					throw new Error("creds");
+
+				const users = await db
+					.select()
+					.from(professors)
+					.where(eq(professors.email, credentials.email));
+				if (users.length !== 1) throw new Error("user");
+
+				const user = users[0];
+				const passwordCheck = new Promise<boolean>((resolve, reject) => {
+					bcrypt.compare(credentials.password, user.password, (err, res) => {
+						if (err) reject(err);
+						resolve(res);
+					});
+				});
+
+				try {
+					const passwordMatch = await passwordCheck;
+					if (!passwordMatch) throw new Error("password");
+
+					return {
+						id: user.id.toString(),
+						email: user.email,
+						name: user.name,
+						image: "",
+					};
+				} catch {
+					throw new Error("password");
+				}
+			},
+		}),
 	],
 });

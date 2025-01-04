@@ -1,12 +1,15 @@
 "use client";
 
-import { defaultValues } from "@/utils/register/defaultValues";
-import { RegisterFormSchema, RegisterValues } from "@/utils/register/schema";
+import {
+	RegisterFormSchema,
+	type RegisterValues,
+} from "@/app/student/register/(form)/schema";
+import { defaultValues } from "@/utils/defaultValues";
 import { trpc } from "@/utils/trpc";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { type SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 export default function RegisterForm(props: { email: string }) {
@@ -20,12 +23,13 @@ export default function RegisterForm(props: { email: string }) {
 	} = useForm<RegisterValues>({
 		resolver: zodResolver(RegisterFormSchema),
 	});
+
 	const onSubmit: SubmitHandler<RegisterValues> = (values) => {
 		const loading = toast.loading("Registering user");
 		userRegistration.mutate(values, {
 			onSuccess: (val) => {
 				toast.success("User registered successfully", { id: loading });
-				router.push("/home");
+				router.push("/student/home");
 			},
 			onError: (err) => {
 				toast.error(err.message, { id: loading });
@@ -46,14 +50,8 @@ export default function RegisterForm(props: { email: string }) {
 		>
 			<span className=" font-medium text-2xl text-center">Register</span>
 			<label className="mt-2">Name</label>
-			<input
-				type="text"
-				className="border px-2 py-1"
-				{...register("name")}
-			/>
-			<span className=" text-red-500 text-sm">
-				{errors.name?.message}
-			</span>
+			<input type="text" className="border px-2 py-1" {...register("name")} />
+			<span className=" text-red-500 text-sm">{errors.name?.message}</span>
 			<label className="mt-2">Email</label>
 			<input
 				defaultValue={props.email}
@@ -62,9 +60,7 @@ export default function RegisterForm(props: { email: string }) {
 				{...register("email")}
 				disabled
 			/>
-			<span className=" text-red-500 text-sm">
-				{errors.email?.message}
-			</span>
+			<span className=" text-red-500 text-sm">{errors.email?.message}</span>
 			<label className="mt-2">College</label>
 			<input
 				{...(defaultValues(props.email) !== undefined && {
@@ -75,9 +71,7 @@ export default function RegisterForm(props: { email: string }) {
 				{...register("college")}
 				disabled={defaultValues(props.email) !== undefined}
 			/>
-			<span className=" text-red-500 text-sm">
-				{errors.college?.message}
-			</span>
+			<span className=" text-red-500 text-sm">{errors.college?.message}</span>
 			<label className="mt-2">Unique Identification No./ID</label>
 			<input
 				defaultValue={defaultValues(props.email)?.uid}

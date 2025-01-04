@@ -9,6 +9,7 @@ export default function Logout() {
 			onClick={() => {
 				signOut();
 			}}
+			type="button"
 		>
 			Logout
 		</button>

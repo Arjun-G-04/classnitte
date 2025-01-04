@@ -1,18 +1,31 @@
 import { caller } from "@/server/caller";
-import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import Login from "./Login";
+import StudentLogin from "./(student)/Login";
+import TeacherLogin from "./(teacher)/Login";
+
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
-	const session = await getServerSession();
-	const userExists = await caller.user.exists();
+	const userStatus = await caller.user.exists();
 
-	if (session && userExists) redirect("/home");
-	if (session) redirect("/register");
+	switch (userStatus) {
+		case "unauthenticated":
+			break;
+		case "unregistered":
+			redirect("/student/register");
+			break;
+		case "user":
+			redirect("/student/home");
+			break;
+		case "professor":
+			redirect("/professor/home");
+			break;
+	}
 
 	return (
 		<div className=" flex flex-col gap-5 h-screen w-full justify-center items-center">
-			<Login />
+			<StudentLogin />
+			<TeacherLogin />
 		</div>
 	);
 }

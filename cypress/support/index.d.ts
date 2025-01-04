@@ -2,8 +2,8 @@
 
 declare namespace Cypress {
 	interface Chainable<Subject> {
-		register(): Chainable<any>;
-		login(): Chainable<any>;
-		loginWithoutRegister(): Chainable<any>;
+		register(): Chainable<Subject>;
+		login(): Chainable<Subject>;
+		loginWithoutRegister(): Chainable<Subject>;
 	}
 }

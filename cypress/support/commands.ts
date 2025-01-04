@@ -21,7 +21,10 @@ Cypress.Commands.add("register", () => {
 			const tempElement = document.createElement("div");
 			tempElement.innerHTML = response;
 			const link = tempElement.querySelector("a")?.getAttribute("href");
-			cy.visit(link!);
+			if (!link) {
+				throw new Error("Link not found");
+			}
+			cy.visit(link);
 		});
 		cy.get('[name="name"]').type("Arjun");
 		cy.contains("Submit").click();
@@ -51,10 +54,11 @@ Cypress.Commands.add("login", () => {
 				const response = interception.response?.body;
 				const tempElement = document.createElement("div");
 				tempElement.innerHTML = response;
-				const link = tempElement
-					.querySelector("a")
-					?.getAttribute("href");
-				cy.visit(link!);
+				const link = tempElement.querySelector("a")?.getAttribute("href");
+				if (!link) {
+					throw new Error("Link not found");
+				}
+				cy.visit(link);
 			});
 			cy.url().should("include", "/home");
 		},
@@ -85,7 +89,10 @@ Cypress.Commands.add("loginWithoutRegister", () => {
 			const tempElement = document.createElement("div");
 			tempElement.innerHTML = response;
 			const link = tempElement.querySelector("a")?.getAttribute("href");
-			cy.visit(link!);
+			if (!link) {
+				throw new Error("Link not found");
+			}
+			cy.visit(link);
 		});
 	});
 });
