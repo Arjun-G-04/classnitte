@@ -7,4 +7,4 @@ export const RegisterFormSchema = z.object({
 	uid: z.string().min(1, "Please enter your UID"),
 });
 
-export type RegisterValues = z.infer<typeof RegisterFormSchema>;
+export type RegisterFormSchemaType = z.infer<typeof RegisterFormSchema>;

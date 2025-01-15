@@ -1,10 +1,10 @@
 "use client";
 
+import { defaultValues } from "@/utils/defaultValues";
 import {
 	RegisterFormSchema,
-	type RegisterValues,
-} from "@/app/student/register/(form)/schema";
-import { defaultValues } from "@/utils/defaultValues";
+	type RegisterFormSchemaType,
+} from "@/utils/schemas/student/Register";
 import { trpc } from "@/utils/trpc";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -20,11 +20,11 @@ export default function RegisterForm(props: { email: string }) {
 		handleSubmit,
 		formState: { errors },
 		setValue,
-	} = useForm<RegisterValues>({
+	} = useForm<RegisterFormSchemaType>({
 		resolver: zodResolver(RegisterFormSchema),
 	});
 
-	const onSubmit: SubmitHandler<RegisterValues> = (values) => {
+	const onSubmit: SubmitHandler<RegisterFormSchemaType> = (values) => {
 		const loading = toast.loading("Registering user");
 		userRegistration.mutate(values, {
 			onSuccess: (val) => {

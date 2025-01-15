@@ -8,6 +8,13 @@
 			"when": 1735967565978,
 			"tag": "0000_smart_swordsman",
 			"breakpoints": true
+		},
+		{
+			"idx": 1,
+			"version": "7",
+			"when": 1736925077985,
+			"tag": "0001_amusing_nuke",
+			"breakpoints": true
 		}
 	]
 }

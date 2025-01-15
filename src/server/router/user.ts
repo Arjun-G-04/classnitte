@@ -1,12 +1,13 @@
 import { getServerSession } from "next-auth";
 import { publicProcedure, router } from "../trpc";
 import { eq } from "drizzle-orm";
-import { RegisterFormSchema } from "@/app/student/register/(form)/schema";
 import { TRPCError } from "@trpc/server";
 import { db } from "@drizzle/index";
 import { users } from "@drizzle/schema/users";
 import { professors } from "@drizzle/schema/professors";
 import { colleges } from "@drizzle/schema/colleges";
+import { classes } from "@drizzle/schema/classes";
+import { RegisterFormSchema } from "@/utils/schemas/student/Register";
 
 const studentProcedure = publicProcedure.use(async (opts) => {
 	// General Error
@@ -97,5 +98,12 @@ export const userRouter = router({
 
 	name: studentProcedure.query(async (opts) => {
 		return opts.ctx.user.name;
+	}),
+
+	getClasses: studentProcedure.query(async (opts) => {
+		const studentClasses = await db
+			.select({ id: classes.id, name: classes.name })
+			.from(classes);
+		return studentClasses;
 	}),
 });

@@ -1,10 +1,13 @@
-import Logout from "@/app/(logout)/Logout";
+import { caller } from "@/server/caller";
+import Buttons from "./_components/Buttons";
 
-export default function Page() {
+export default async function Page() {
+	const name = await caller.professor.name();
+
 	return (
-		<div>
-			Welcome Prof!
-			<Logout />
+		<div className="flex flex-col h-screen w-screen justify-center items-center gap-2">
+			Welcome Professor {name}!
+			<Buttons />
 		</div>
 	);
 }
