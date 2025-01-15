@@ -1,15 +1,13 @@
 import { db } from "..";
 import { sql } from "drizzle-orm";
 
-type TableNameRow = { table_name: string };
-
 async function main() {
-	const query = sql<TableNameRow>`SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'BASE TABLE';`;
-	const tables = await db.execute<TableNameRow>(query);
-	for (const table of tables.rows) {
-		const query = sql.raw(`DROP TABLE "${table.table_name}" CASCADE;`);
-		await db.execute(query);
-	}
+	const query1 = sql.raw("DROP SCHEMA public CASCADE;");
+	await db.execute(query1);
+	const query2 = sql.raw("DROP SCHEMA drizzle CASCADE;");
+	await db.execute(query2);
+	const query3 = sql.raw("CREATE SCHEMA public;");
+	await db.execute(query3);
 	console.log("Reset complete.");
 }
 

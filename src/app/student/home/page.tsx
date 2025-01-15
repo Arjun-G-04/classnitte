@@ -1,8 +1,6 @@
 import { caller } from "@/server/caller";
 import Buttons from "./_components/Buttons";
 
-export const dynamic = "force-dynamic";
-
 export default async function Page() {
 	const name = await caller.user.name();
 

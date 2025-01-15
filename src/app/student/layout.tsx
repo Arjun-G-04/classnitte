@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
-export default async function ProfessorLayout({
+export default async function StudentLayout({
 	children,
 }: {
 	children: React.ReactNode;
