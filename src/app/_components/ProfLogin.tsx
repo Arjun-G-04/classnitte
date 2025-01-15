@@ -5,13 +5,17 @@ import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { LoginFormSchema } from "./schema";
-import type { z } from "zod";
+import { z } from "zod";
 import { signIn } from "next-auth/react";
+
+const LoginFormSchema = z.object({
+	email: z.string().email("Please enter a valid email"),
+	password: z.string().min(1, "Please enter a password"),
+});
 
 type LoginValues = z.infer<typeof LoginFormSchema>;
 
-export default function TeacherLogin() {
+export default function ProfLogin() {
 	const searchParams = useSearchParams();
 	const errMsg = searchParams.get("error");
 	const {
