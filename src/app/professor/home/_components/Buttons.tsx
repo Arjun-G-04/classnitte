@@ -3,6 +3,7 @@
 import CustomButton from "@/app/_components/CustomButton";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function Buttons() {
 	const router = useRouter();
@@ -13,7 +14,10 @@ export default function Buttons() {
 				type="sync"
 				text="Logout"
 				syncFn={() => {
-					signOut();
+					const loadingToast = toast.loading("Logging out...");
+					signOut().then(() => {
+						toast.success("Logged out successfully", { id: loadingToast });
+					});
 				}}
 			/>
 			<CustomButton
