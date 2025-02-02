@@ -18,7 +18,6 @@ export default function RegisterForm(props: { email: string }) {
 		register,
 		handleSubmit,
 		formState: { errors },
-		setValue,
 	} = useForm<RegisterFormSchemaType>({
 		resolver: zodResolver(RegisterFormSchema),
 		defaultValues: {
