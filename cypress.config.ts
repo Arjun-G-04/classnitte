@@ -7,6 +7,7 @@ export default defineConfig({
 			"cypress/e2e/landing.cy.ts",
 			"cypress/e2e/home.cy.ts",
 			"cypress/e2e/api/*.cy.ts",
+			"cypress/e2e/professorLogin.cy.ts",
 		],
 	},
 });
