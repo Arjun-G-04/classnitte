@@ -8,19 +8,24 @@ import toast from "react-hot-toast";
 export default function Buttons() {
 	const router = useRouter();
 
-	const handleLogout = async () => {
-		const loadingToast = toast.loading("Logging out...");
-		try {
-			await signOut();
-			toast.success("Logged out successfully", { id: loadingToast });
-		} catch (error) {
-			toast.error("Error logging out", { id: loadingToast });
-		}
-	};
-
 	return (
 		<div className="flex flex-row gap-5">
-			<CustomButton type="sync" text="Logout" syncFn={handleLogout} />
+			<CustomButton
+				type="async"
+				text="Logout"
+				asyncFn={async () => {
+					try {
+						await signOut();
+						return { ok: true, success: "Logged out successfully" };
+					} catch (error) {
+						const errorMessage =
+							(error as Error).message || "An unknown error occurred";
+						toast.error(`Error performing logout: ${errorMessage}`);
+						return { ok: false, error: errorMessage };
+					}
+				}}
+				loading="true"
+			/>
 			<CustomButton
 				type="sync"
 				text="View Classes"
