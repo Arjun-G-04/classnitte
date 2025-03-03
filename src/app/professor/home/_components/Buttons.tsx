@@ -3,7 +3,6 @@
 import CustomButton from "@/app/_components/CustomButton";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 
 export default function Buttons() {
 	const router = useRouter();
@@ -14,17 +13,10 @@ export default function Buttons() {
 				type="async"
 				text="Logout"
 				asyncFn={async () => {
-					try {
-						await signOut();
-						return { ok: true, success: "Logged out successfully" };
-					} catch (error) {
-						const errorMessage =
-							(error as Error).message || "An unknown error occurred";
-						toast.error(`Error performing logout: ${errorMessage}`);
-						return { ok: false, error: errorMessage };
-					}
+					await signOut();
+					return { ok: true, success: "Logged out successfully" };
 				}}
-				loading="true"
+				loading="Logging out..."
 			/>
 			<CustomButton
 				type="sync"
