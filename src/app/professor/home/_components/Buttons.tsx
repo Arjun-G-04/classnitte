@@ -10,11 +10,13 @@ export default function Buttons() {
 	return (
 		<div className="flex flex-row gap-5">
 			<CustomButton
-				type="sync"
+				type="async"
 				text="Logout"
-				syncFn={() => {
-					signOut();
+				asyncFn={async () => {
+					await signOut();
+					return { ok: true, success: "Logged out successfully" };
 				}}
+				loading="Logging out..."
 			/>
 			<CustomButton
 				type="sync"

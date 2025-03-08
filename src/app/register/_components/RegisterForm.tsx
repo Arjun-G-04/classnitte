@@ -8,7 +8,6 @@ import {
 import { trpc } from "@/utils/trpc";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
@@ -19,9 +18,13 @@ export default function RegisterForm(props: { email: string }) {
 		register,
 		handleSubmit,
 		formState: { errors },
-		setValue,
 	} = useForm<RegisterFormSchemaType>({
 		resolver: zodResolver(RegisterFormSchema),
+		defaultValues: {
+			email: props.email,
+			college: defaultValues(props.email)?.college ?? "",
+			uid: defaultValues(props.email)?.uid ?? "",
+		},
 	});
 
 	const onSubmit: SubmitHandler<RegisterFormSchemaType> = (values) => {
@@ -36,12 +39,6 @@ export default function RegisterForm(props: { email: string }) {
 			},
 		});
 	};
-
-	useEffect(() => {
-		setValue("email", props.email);
-		setValue("college", defaultValues(props.email)?.college ?? "");
-		setValue("uid", defaultValues(props.email)?.uid ?? "");
-	}, [setValue, props.email]);
 
 	return (
 		<form
