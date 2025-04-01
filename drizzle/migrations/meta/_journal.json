@@ -15,6 +15,13 @@
 			"when": 1736925077985,
 			"tag": "0001_amusing_nuke",
 			"breakpoints": true
+		},
+		{
+			"idx": 2,
+			"version": "7",
+			"when": 1738670747787,
+			"tag": "0002_overconfident_whiplash",
+			"breakpoints": true
 		}
 	]
 }
